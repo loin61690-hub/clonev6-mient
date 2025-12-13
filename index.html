@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ ĐĂNG KÝ KITA-BOT (TẠO UID) ⚡</title>
+    <style>
+        /* --- CSS CƠ BẢN VÀ HIỆU ỨNG NEON (KẾ THỪA TỪ PHẦN TRƯỚC) --- */
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --neon-green: #00ff00;
+            --dark-bg: #0a0a0d;
+            --dark-accent: #1e1e2c;
+            --neon-red: #ff3333;
+            --glow-spread: 3px;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Consolas', 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* KHUNG CHÍNH (CONTAINER) */
+        .neon-container {
+            background-color: var(--dark-accent);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 
+                0 0 10px var(--neon-blue),
+                0 0 20px var(--neon-blue),
+                0 0 40px rgba(0, 255, 255, 0.5);
+            padding: 30px 40px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: pulse-border 5s infinite alternate;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px rgba(0, 255, 255, 0.5); }
+            50% { border-color: var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 40px rgba(255, 0, 255, 0.5); }
+            100% { border-color: var(--neon-green); box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px rgba(0, 255, 0, 0.5); }
+        }
+
+        /* TIÊU ĐỀ NEON */
+        .neon-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            text-shadow: 
+                0 0 var(--glow-spread) #fff,
+                0 0 10px var(--neon-pink),
+                0 0 40px var(--neon-pink);
+            animation: color-shift 4s infinite alternate;
+        }
+
+        @keyframes color-shift {
+            0% { text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
+            33% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+            66% { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green); }
+            100% { text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
+        }
+
+        /* INPUT FIELD */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            font-weight: bold;
+        }
+
+        #kitaIdInput {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: var(--dark-accent);
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-size: 1.1em;
+            border-radius: 5px;
+            outline: none;
+            box-shadow: 0 0 5px var(--neon-blue);
+            transition: all 0.3s;
+        }
+
+        #kitaIdInput:focus {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* NÚT ĐĂNG KÝ (SUBMIT) */
+        .neon-button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background-color: transparent;
+            border: 2px solid var(--neon-green);
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 
+                0 0 5px var(--neon-green),
+                0 0 15px var(--neon-green);
+            position: relative;
+            z-index: 10;
+        }
+
+        .neon-button:hover {
+            color: var(--dark-bg);
+            background-color: var(--neon-green);
+            box-shadow: 
+                0 0 10px var(--neon-green),
+                0 0 30px var(--neon-green),
+                0 0 60px var(--neon-green);
+        }
+
+        .neon-button:active {
+            transform: scale(0.98);
+        }
+        
+        .neon-button:disabled {
+            background-color: rgba(30, 30, 44, 0.5);
+            border-color: #555;
+            color: #888;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* KHU VỰC THÔNG BÁO VÀ UID */
+        #message-display {
+            margin-top: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            min-height: 40px; 
+            text-align: center;
+        }
+
+        #result-text {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
+            word-break: break-all;
+        }
+
+        .success {
+            color: var(--neon-green);
+            border: 1px dashed var(--neon-green);
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .error {
+            color: var(--neon-red);
+            border: 1px dashed var(--neon-red);
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+        }
+
+        /* HIỆU ỨNG ĐÈN CHUYỂN MÀU NỀN */
+        .color-cycle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.15;
+            animation: color-cycle 20s infinite linear;
+            filter: blur(100px);
+        }
+
+        @keyframes color-cycle {
+            0% { background: radial-gradient(circle at top left, var(--neon-pink) 0%, transparent 50%); }
+            25% { background: radial-gradient(circle at bottom right, var(--neon-blue) 0%, transparent 50%); }
+            50% { background: radial-gradient(circle at top right, var(--neon-green) 0%, transparent 50%); }
+            75% { background: radial-gradient(circle at bottom left, var(--neon-pink) 0%, transparent 50%); }
+            100% { background: radial-gradient(circle at top left, var(--neon-pink) 0%, transparent 50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="color-cycle-bg"></div>
+    
+    <div class="neon-container">
+        
+        <h1 class="neon-title">⚡ BOT KITA REGISTRY ⚡</h1>
+        
+        <div class="input-group">
+            <label for="kitaIdInput">NHẬP ID KITA CỦA BẠN (KITA-BOT/1 -> KITA-BOT/200):</label>
+            <input type="text" id="kitaIdInput" placeholder="VD: KITA-BOT/1" required>
+        </div>
+        
+        <button class="neon-button" id="registerButton">
+            ĐĂNG KÝ VÀ LẤY UID PAPY 🔑
+        </button>
+        
+        <div id="message-display">
+            </div>
+
+    </div>
+
+    <script>
+        // Sử dụng Local Storage để lưu trữ trạng thái đăng ký của 200 ID
+        const STORAGE_KEY = 'kitaBotRegisteredIds';
+        const TOTAL_BOTS = 200;
+
+        let registeredStatus = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+        // 1. Khởi tạo/Tải trạng thái đăng ký
+        if (!registeredStatus) {
+            registeredStatus = {};
+            for (let i = 1; i <= TOTAL_BOTS; i++) {
+                // Khởi tạo tất cả ID KITA là CHƯA SỬ DỤNG (false)
+                registeredStatus[`KITA-BOT/${i}`] = false; 
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(registeredStatus));
+        }
+        
+        // 2. Hàm ánh xạ ID KITA sang UID PAPY
+        function getPapyUID(kitaId) {
+            // Lấy số thứ tự từ chuỗi KITA-BOT/N
+            const match = kitaId.match(/KITA-BOT\/(\d+)/);
+            if (match) {
+                const number = match[1];
+                return `PAPY-BOT/${number}`;
+            }
+            return null; // Trả về null nếu không đúng định dạng
+        }
+        
+        // 3. Xử lý sự kiện khi nhấn nút ĐĂNG KÝ
+        document.getElementById('registerButton').addEventListener('click', function() {
+            const kitaIdInput = document.getElementById('kitaIdInput');
+            const messageDisplay = document.getElementById('message-display');
+            const inputId = kitaIdInput.value.trim().toUpperCase();
+
+            // Reset hiển thị
+            messageDisplay.innerHTML = '';
+
+            // --- KIỂM TRA TÍNH HỢP LỆ VÀ TRẠNG THÁI ---
+            
+            // 3.1. Kiểm tra định dạng và khoảng giá trị
+            const isValidFormat = /^KITA-BOT\/\d+$/.test(inputId);
+            const match = inputId.match(/KITA-BOT\/(\d+)/);
+            let isWithinRange = false;
+            if (match) {
+                const number = parseInt(match[1]);
+                if (number >= 1 && number <= TOTAL_BOTS) {
+                    isWithinRange = true;
+                }
+            }
+            
+            if (!isValidFormat || !isWithinRange) {
+                messageDisplay.innerHTML = `<span id="result-text" class="error">❌ LỖI: ID không hợp lệ. Vui lòng nhập ID từ KITA-BOT/1 đến KITA-BOT/${TOTAL_BOTS}.</span>`;
+                return;
+            }
+
+            // 3.2. Kiểm tra trạng thái đã đăng ký
+            if (registeredStatus[inputId] === true) {
+                messageDisplay.innerHTML = `<span id="result-text" class="error">❌ LỖI: ID <strong>${inputId}</strong> đã được sử dụng. Vui lòng thử ID khác.</span>`;
+                return;
+            }
+
+            // --- THÀNH CÔNG ---
+            
+            const papyUid = getPapyUID(inputId);
+            
+            // Cập nhật trạng thái đăng ký
+            registeredStatus[inputId] = true;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(registeredStatus));
+            
+            // Hiển thị kết quả UID
+            messageDisplay.innerHTML = `
+                <span id="result-text" class="success">
+                    ✅ ĐĂNG KÝ THÀNH CÔNG! <br>
+                    ID KITA: <strong>${inputId}</strong> <br>
+                    UID PAPY CỦA BẠN LÀ: <br>
+                    <strong style="font-size: 1.2em; user-select: all;">${papyUid}</strong>
+                </span>
+            `;
+            
+            // Xóa input sau khi đăng ký
+            kitaIdInput.value = '';
+
+            console.log(`[LOG] Đăng ký thành công. ID KITA: ${inputId} -> UID PAPY: ${papyUid}`);
+        });
+
+    </script>
+</body>
+</html>
